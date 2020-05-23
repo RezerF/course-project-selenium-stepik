@@ -5,6 +5,11 @@ class MainPageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
 
 
+class BasePageLocators():
+    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
+
+
 class LoginPageLocators():
     FORM_LOGIN = (By.CSS_SELECTOR, '#login_form')
     FORM_REGISTRATION = (By.CSS_SELECTOR, '#register_form')
@@ -24,6 +29,4 @@ class ProductPageLocators():
     NAME_BOOK_CONFIRM_CART = (By.XPATH, '//div[@class="alertinner "]/strong')
     BOOK_CONFIRM_CART_TEXT = (By.XPATH, '//div[@class="alertinner "]')
     BOOK_CONFIRM_PRICE = (By.XPATH, '//div[@class="alertinner "]/p/strong')
-
-
 
