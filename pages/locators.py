@@ -8,6 +8,12 @@ class MainPageLocators():
 class BasePageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
+    BASKET_LINK = (By.XPATH, '//span/a[@class="btn btn-default"]')
+
+
+class BasketPageLocators():
+    BASKET_EMPTY_TEXT = (By.CSS_SELECTOR, '#content_inner p')
+    BASKET_GOODS_IN = (By.CSS_SELECTOR, '.col-sm-6.h3')
 
 
 class LoginPageLocators():
