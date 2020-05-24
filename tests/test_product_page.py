@@ -1,6 +1,33 @@
 from pages.product_page import ProductPage
 from pages.basket_page import BasketPage
+from pages.login_page import LoginPage
 import time, pytest
+
+
+class TestUserAddToBasketFromProductPage():
+    @pytest.fixture(scope='function', autouse=True)
+    def setup(self, browser):
+        link = 'http://selenium1py.pythonanywhere.com/ru/accounts/login/'
+        page = LoginPage(browser, link)
+        page.open()
+        email = str(time.time()) + "@fakemail.org"
+        page.register_new_user(email,'QweXzQa1234We')
+        page.should_be_authorized_user()
+
+    def test_user_cant_see_success_message(self, browser):
+        link = f'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207'
+        page = ProductPage(browser, link)
+        page.open()
+        page.should_not_be_success_message()
+
+    def test_user_can_add_product_to_basket(self, browser):
+        link = f'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207'
+        page = ProductPage(browser, link)
+        page.open()
+        page.add_to_cart()
+        page.should_be_good_in_cart()
+        page.should_be_correct_cost()
+
 
 #@pytest.mark.parametrize('promo',[
 #'?promo=offer0',
@@ -38,14 +65,14 @@ import time, pytest
 #    page.open()
 #    page.should_not_be_success_message()
 #
-def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
-    link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
-    page = ProductPage(browser, link)
-    page.open()
-    page.go_to_basket_page()
-    page_basket = BasketPage(browser, browser.current_url)
-    page_basket.should_be_empty_basket()
-    page_basket.is_not_good_in_basket()
+#def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+#    link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
+#    page = ProductPage(browser, link)
+#    page.open()
+#    page.go_to_basket_page()
+#    page_basket = BasketPage(browser, browser.current_url)
+#    page_basket.should_be_empty_basket()
+#    page_basket.is_not_good_in_basket()
 
 #@pytest.mark.xfail(reason='Fixed right now')
 #def test_message_disappeared_after_adding_product_to_basket(browser):

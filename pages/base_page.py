@@ -21,6 +21,9 @@ class BasePage():
         link.click()
         #return LoginPage(browser=self.browser, url=self.browser.current_url)  можно этим неявным способом урок 4-2-9
 
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), 'User not authorized'
+
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
 
